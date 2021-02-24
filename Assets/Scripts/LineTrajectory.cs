@@ -8,6 +8,7 @@ public class LineTrajectory : MonoBehaviour
 
     LineRenderer lr;
     public int numTrajectorySegments = 250; //the number of trajectory segments
+    //test
 
     private void Awake()
     {
