@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Camera cam;
     public int speed = 10;
+    public float projectileSpawnOffset = 1f; //bullet should be offset (so as not to spawn inside the player)
 
     Vector2 mousePos;
     void Update()
@@ -22,7 +23,9 @@ public class Weapon : MonoBehaviour
             float angle = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg - 90f; //angle = z rotation
             firePoint.rotation = Quaternion.Euler(0, 0, angle);
 
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Vector3 projectileOffset = new Vector3(projectileDirection.x * projectileSpawnOffset, projectileDirection.y * projectileSpawnOffset, 0);
+            Vector3 projectileSpawnPoint = firePoint.position + projectileOffset;
+            GameObject bullet = Instantiate(bulletPrefab, projectileSpawnPoint, firePoint.rotation);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileDirection.x * speed, projectileDirection.y*speed); 
         }
     }
