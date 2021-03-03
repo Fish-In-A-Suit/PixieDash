@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 20;
     public GameObject bulletImpact;
+
+    AudioSource impactSound;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +19,18 @@ public class Bullet : MonoBehaviour
          * the weapon script), we get a reference to the bullet's rb in Weapon.cs and
          * use this script only for collision detection.
          * */
+        impactSound = GetComponent<AudioSource>();
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Debug.Log("hitinfo.name =" + hitInfo.name);
+        impactSound.Play(0);
 
         //bullet impact
         if(!hitInfo.name.Equals("player-body1"))
