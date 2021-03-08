@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 20;
     public GameObject bulletImpact;
+    public float impactVolume = 1; //the volume of the bullet impact clip
 
     AudioSource impactSound;
 
@@ -30,7 +31,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Debug.Log("hitinfo.name =" + hitInfo.name);
-        impactSound.Play(0);
+        AudioSource.PlayClipAtPoint(impactSound.clip, hitInfo.transform.position, impactVolume);
 
         //bullet impact
         if(!hitInfo.name.Equals("player-body1"))
