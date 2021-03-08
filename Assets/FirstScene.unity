@@ -2623,6 +2623,12 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2605280157779093014, guid: d519d8a7b66103446827ed5c5d9cfb1f,
         type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 197570065783851022, guid: ce163f51bf7be784f943de1f2c27cee7,
+        type: 3}
+    - target: {fileID: 2605280157779093014, guid: d519d8a7b66103446827ed5c5d9cfb1f,
+        type: 3}
       propertyPath: projectileSpawnOffset
       value: 0.05
       objectReference: {fileID: 0}
