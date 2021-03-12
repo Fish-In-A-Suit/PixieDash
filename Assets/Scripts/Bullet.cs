@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 20;
-    public GameObject bulletImpact;
-    public float impactVolume = 1; //the volume of the bullet impact clip
+    public GameObject bulletImpactEffect;
 
-    AudioSource impactSound;
+    public float impactVolume = 1; //the volume of the bullet impact clip
+    public AudioClip bulletImpactSoundDefault; //the default bullet sound effect
+    public AudioClip bulletImpactSoundEnemy; //the sound effect when bullet hits enemy
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
          * the weapon script), we get a reference to the bullet's rb in Weapon.cs and
          * use this script only for collision detection.
          * */
-        impactSound = GetComponent<AudioSource>();
+        //impactSound = GetComponent<AudioSource>();
     }
 
     private void OnBecameInvisible()
@@ -31,20 +31,25 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Debug.Log("hitinfo.name =" + hitInfo.name);
-        AudioSource.PlayClipAtPoint(impactSound.clip, hitInfo.transform.position, impactVolume);
+        Enemy enemy = hitInfo.GetComponent<Enemy>();
 
         //bullet impact
-        if(!hitInfo.name.Equals("player-body1"))
-        {
-            Instantiate(bulletImpact, transform.position, transform.rotation);
+        if(!hitInfo.name.Equals("player-body1")) {
+            if (enemy != null) {
+                AudioSource.PlayClipAtPoint(bulletImpactSoundEnemy, hitInfo.transform.position, impactVolume);
+            }
+            else {
+                AudioSource.PlayClipAtPoint(bulletImpactSoundDefault, hitInfo.transform.position, impactVolume);
+            }
+
+            Instantiate(bulletImpactEffect, transform.position, transform.rotation);
         }
         
-        if(hitInfo.name.Equals("Tilemap"))
-        {
+        if(hitInfo.name.Equals("Tilemap")) {
             Destroy(gameObject);
         }
 
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
+        
         if(enemy != null)
         {
             enemy.TakeDamage(bulletDamage);

@@ -21,6 +21,9 @@ public class PixieController : MonoBehaviour
 
     public float velocityThreshold = 1.5f; //if final velocity is lower than velocityThreshold, it is not applied. This is to prevent minimal movements that result in glitching camera.
 
+    public AudioClip jumpSound;
+    public float jumpSoundVolume = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,7 @@ public class PixieController : MonoBehaviour
                 Mathf.Clamp(dragStartPosition.y - dragEndPosition.y, minPower.y, maxPower.y)
                 );
 
+            AudioSource.PlayClipAtPoint(jumpSound, transform.position, jumpSoundVolume);
             Vector2 velocity = force * slingshotPower;
 
             //rb.AddForce(force * slingshotPower, ForceMode2D.Impulse);
