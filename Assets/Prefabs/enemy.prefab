@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 882234492831149314}
   - component: {fileID: 882234492831149312}
   - component: {fileID: 882234492831149372}
-  m_Layer: 0
+  - component: {fileID: 2123244292}
+  m_Layer: 8
   m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882234492831149319}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.293, y: -0.473, z: 0}
   m_LocalScale: {x: 0.56317127, y: 0.5833881, z: 0.65}
   m_Children: []
@@ -235,3 +236,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2123244292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882234492831149319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60aaa0b1ed3eea34c95f976cd6eaf180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 256
