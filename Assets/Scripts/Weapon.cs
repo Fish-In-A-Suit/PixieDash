@@ -12,13 +12,15 @@ public class Weapon : MonoBehaviour
     public int speed = 10;
     public float projectileSpawnOffset = 1f; //bullet should be offset (so as not to spawn inside the player)
 
-    AudioSource audioSource;
+    public AudioClip shootSound;
+    public float shootSoundVolume = 1f;
+    //AudioSource audioSource;
 
     Vector2 mousePos;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -35,8 +37,9 @@ public class Weapon : MonoBehaviour
             Vector3 projectileOffset = new Vector3(projectileDirection.x * projectileSpawnOffset, projectileDirection.y * projectileSpawnOffset, 0);
             Vector3 projectileSpawnPoint = firePoint.position + projectileOffset;
             GameObject bullet = Instantiate(bulletPrefab, projectileSpawnPoint, firePoint.rotation);
+            bullet.GetComponent<Bullet>().setShotByPlayer(true);
 
-            audioSource.Play(0);
+            AudioSource.PlayClipAtPoint(shootSound, projectileSpawnPoint, shootSoundVolume);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileDirection.x * speed, projectileDirection.y*speed); 
         }
     }

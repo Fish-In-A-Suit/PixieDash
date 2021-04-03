@@ -146,7 +146,7 @@ MonoBehaviour:
   bulletDamage: 20
   bulletImpactEffect: {fileID: 7994276062535439814, guid: 22e2dce11dec2a14aa4cd56608487304,
     type: 3}
-  impactVolume: 0.72
+  impactVolume: 0.2
   bulletImpactSoundDefault: {fileID: 8300000, guid: b70868dd82bf3aa47aa2c1c87ac1184a,
     type: 3}
   bulletImpactSoundEnemy: {fileID: 8300000, guid: 5519694b3480bbd4baa947fac74519bc,
