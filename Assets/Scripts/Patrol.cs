@@ -90,6 +90,7 @@ public class Patrol : MonoBehaviour
     /*
      * Takes two coordinates and produces a path between them which avoids obstacles
      * */
+    //test
     private List<Vector2> computePath(Vector3 origin, Vector3 destination)
     {
         List<Vector2> path = new List<Vector2>();
