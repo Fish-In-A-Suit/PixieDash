@@ -24,11 +24,11 @@ public class Patrol : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {  
         if(!hasDestination)
         {
             destination = computeDestination(findRandomLocation(transform, enemyPathingRadius));
+            Debug.DrawLine(new Vector3(transform.position.x, transform.position.y, 0), destination, Color.red, 5, false);
 
             path = computePath(transform.position, destination);
 

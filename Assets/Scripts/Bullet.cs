@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
 
     bool shotByPlayer = false; //used for controlling the bullet collision 
 
+    //public CameraShake cameraShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class Bullet : MonoBehaviour
             {
                 //bullet hit from enemy and hit player
                 player.TakeDamage(bulletDamage);
+
                 //todo: make a player wounded effect and play it here instead of default bullet sound
                 AudioSource.PlayClipAtPoint(bulletImpactSoundDefault, hitInfo.transform.position, impactVolume);
                 Instantiate(bulletImpactEffect, transform.position, transform.rotation);
