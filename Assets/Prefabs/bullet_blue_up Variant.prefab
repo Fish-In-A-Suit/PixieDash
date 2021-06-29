@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: impactVolume
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3996013074698128891, guid: ce163f51bf7be784f943de1f2c27cee7,
+        type: 3}
+      propertyPath: cameraShakeDuration
+      value: 4.62
+      objectReference: {fileID: 0}
     - target: {fileID: 3996013074698128893, guid: ce163f51bf7be784f943de1f2c27cee7,
         type: 3}
       propertyPath: m_Name

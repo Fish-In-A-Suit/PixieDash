@@ -33,31 +33,13 @@ public class Aggressor : MonoBehaviour
         {
             if (isPlayerVisible())
             {
-                nextFire = Time.time + shotCooldown;
-
-                //shoot
-                Vector2 playerLocation = new Vector2(player.position.x, player.position.y);
-                Vector2 firepointLocation = new Vector2(firepoint.position.x, firepoint.position.y);
-                Vector2 projectileDirection = playerLocation - firepointLocation;
-                projectileDirection.Normalize();
-
-                float angle = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg - 90f;
-                firepoint.rotation = Quaternion.Euler(0, 0, angle);
-
-                Vector3 projectileOffset = new Vector3(projectileDirection.x * projectileSpawnOffset, projectileDirection.y * projectileSpawnOffset, 0);
-                Vector3 projectileSpawnPoint = firepoint.position + projectileOffset;
-                GameObject bullet = Instantiate(bulletPrefab, projectileSpawnPoint, firepoint.rotation);
-
-                //play audio
-                AudioSource.PlayClipAtPoint(shootSound, firepointLocation, shootSoundVolume);
-
-                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileDirection.x * bulletSpeed, projectileDirection.y * bulletSpeed);
+                attemptFire();
             }
         }
         
     }
 
-    bool isPlayerVisible()
+    private bool isPlayerVisible()
     {
         Vector2 rayDirection = player.position - transform.position;
         Debug.DrawLine(player.position, transform.position, Color.green, 2, false); //enable gizmos if line isn't drawn
@@ -78,5 +60,28 @@ public class Aggressor : MonoBehaviour
             Debug.Log("player not visible");
             return false;
         }
+    }
+
+    private void attemptFire()
+    {
+        nextFire = Time.time + shotCooldown;
+
+        //shoot
+        Vector2 playerLocation = new Vector2(player.position.x, player.position.y);
+        Vector2 firepointLocation = new Vector2(firepoint.position.x, firepoint.position.y);
+        Vector2 projectileDirection = playerLocation - firepointLocation;
+        projectileDirection.Normalize();
+
+        float angle = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg - 90f;
+        firepoint.rotation = Quaternion.Euler(0, 0, angle);
+
+        Vector3 projectileOffset = new Vector3(projectileDirection.x * projectileSpawnOffset, projectileDirection.y * projectileSpawnOffset, 0);
+        Vector3 projectileSpawnPoint = firepoint.position + projectileOffset;
+        GameObject bullet = Instantiate(bulletPrefab, projectileSpawnPoint, firepoint.rotation);
+
+        //play audio
+        AudioSource.PlayClipAtPoint(shootSound, firepointLocation, shootSoundVolume);
+
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileDirection.x * bulletSpeed, projectileDirection.y * bulletSpeed);
     }
 }

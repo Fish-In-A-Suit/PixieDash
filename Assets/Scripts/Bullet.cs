@@ -13,18 +13,15 @@ public class Bullet : MonoBehaviour
 
     bool shotByPlayer = false; //used for controlling the bullet collision 
 
-    //public CameraShake cameraShake;
+    private CameraShakeCoroutine cameraShakeCoroutine;
 
-    // Start is called before the first frame update
     void Start()
     {
-        /*
-         * Normally,apply the velocity to the bullet here in the Start method, but
-         * since we have to take velocity x and y components into account (accessible from
-         * the weapon script), we get a reference to the bullet's rb in Weapon.cs and
-         * use this script only for collision detection.
-         * */
-        //impactSound = GetComponent<AudioSource>();
+        cameraShakeCoroutine = Camera.main.GetComponent<CameraShakeCoroutine>();
+        if(cameraShakeCoroutine == null)
+        {
+            Debug.Log("[Bullet.cs]: CameraShakeCoroutine for Camera.main is missing. Unable to shake camera.");
+        }
     }
 
     private void OnBecameInvisible()
@@ -57,10 +54,12 @@ public class Bullet : MonoBehaviour
             {
                 //bullet hit from enemy and hit player
                 player.TakeDamage(bulletDamage);
+                cameraShakeCoroutine.setShouldCameraShake(true);
 
                 //todo: make a player wounded effect and play it here instead of default bullet sound
                 AudioSource.PlayClipAtPoint(bulletImpactSoundDefault, hitInfo.transform.position, impactVolume);
                 Instantiate(bulletImpactEffect, transform.position, transform.rotation);
+                
                 Destroy(gameObject);
             }
         }
